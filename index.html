@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChessFamily - Học Cờ Vua Cùng Con | Giáo Trình Cờ Vua Tương Tác</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Trang web học cờ vua bài bản từ đầu dành cho phụ huynh chơi cùng con. Với giao diện tương tác đẹp mắt, lý thuyết dễ hiểu, đòn chiến thuật sinh động và minigame ăn sao hấp dẫn.">
+  <meta name="keywords" content="học cờ vua, chơi cờ cùng con, cờ vua gia đình, chiến thuật cờ vua, chessfamily, giáo trình cờ vua">
+  <meta name="author" content="ChessFamily Team">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- File Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Khung tiêu đề Header -->
+  <header class="app-header glass-panel">
+    <div class="header-brand">
+      <span class="logo-emoji">👑</span>
+      <div class="brand-text">
+        <h1 id="app-main-title">ChessFamily</h1>
+        <p class="brand-tagline">Học cờ vua bài bản để cùng con khôn lớn</p>
+      </div>
+    </div>
+    <div class="header-achievements">
+      <div class="achievement-badge" title="Học tập kiên trì">
+        <span>🏆</span> <span class="badge-count" id="badge-points">Vua & Bé</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Bố cục chính Grid Layout -->
+  <main class="main-layout">
+    
+    <!-- Sidebar bên trái: Danh sách bài học -->
+    <aside class="sidebar-panel glass-panel" aria-label="Danh mục giáo trình">
+      <div class="sidebar-header">
+        <h2>Lộ trình Học cờ</h2>
+        <p>Bấm chọn từng bài học</p>
+      </div>
+      <div class="sidebar-scroll" id="lessons-list">
+        <!-- Render động danh sách bài học qua app.js -->
+      </div>
+    </aside>
+
+    <!-- Khu vực hiển thị nội dung chính bên phải -->
+    <section class="main-display-panel" aria-label="Nội dung chi tiết bài học">
+      
+      <!-- Thanh điều hướng Tab Nav -->
+      <nav class="tabs-navigation glass-panel" aria-label="Điều hướng tính năng">
+        <button class="tab-nav-btn active" data-tab="lessons" id="nav-btn-lessons">
+          <span class="tab-icon">📖</span> Bài Học
+        </button>
+        <button class="tab-nav-btn" data-tab="practice" id="nav-btn-practice">
+          <span class="tab-icon">🧩</span> Luyện Tập
+        </button>
+        <button class="tab-nav-btn" data-tab="quiz" id="nav-btn-quiz">
+          <span class="tab-icon">📝</span> Trắc Nghiệm
+        </button>
+        <button class="tab-nav-btn" data-tab="family" id="nav-btn-family">
+          <span class="tab-icon">👨‍👩‍👦</span> Đấu Trường
+        </button>
+      </nav>
+
+      <!-- Nội dung Tab 1: Giáo trình lý thuyết bài học -->
+      <div class="tab-content-panel active" id="lessons-panel">
+        <div class="lesson-intro-section glass-panel">
+          <h2 id="active-lesson-title">Bài 1: Làm Quen Bàn Cờ</h2>
+          <h3 id="active-lesson-subtitle">Nhận biết hình ảnh quân cờ</h3>
+          <p id="active-lesson-intro" class="lesson-intro-text"></p>
+        </div>
+        
+        <div class="lesson-sections-grid" id="lesson-sections-list">
+          <!-- Render động danh sách thẻ bài học -->
+        </div>
+      </div>
+
+      <!-- Nội dung Tab 2: Bàn cờ tương tác luyện tập -->
+      <div class="tab-content-panel" id="practice-panel">
+        <div class="interactive-practice-area" id="practice-zone">
+          <!-- Render bàn cờ và bảng trạng thái qua app.js -->
+        </div>
+      </div>
+
+      <!-- Nội dung Tab 3: Trắc nghiệm lý thuyết lật thẻ -->
+      <div class="tab-content-panel" id="quiz-panel">
+        <div class="quiz-instruction-box glass-panel">
+          <h2>Trắc nghiệm Phản Xạ Nhanh</h2>
+          <p>Hãy hoàn thành các câu trắc nghiệm dưới đây để chứng minh sự am hiểu pháp lệnh và chiến thuật của bạn nhé!</p>
+        </div>
+        <div class="quiz-questions-scroll" id="quiz-questions-container">
+          <!-- Render câu hỏi qua app.js -->
+        </div>
+      </div>
+
+      <!-- Nội dung Tab 4: Đấu trường gia đình (Family Versus Arena) -->
+      <div class="tab-content-panel" id="family-panel">
+        <div class="family-intro-box glass-panel">
+          <h2>👨‍👩‍👦 Đấu Trường Kỳ Thủ Gia Đình</h2>
+          <p>Thiết lập luật chơi chấp cờ đặc biệt và sử dụng Thẻ Quyền Năng để giúp Mẹ đấu trí cân sức, ngập tràn tiếng cười cùng Bố và Bé!</p>
+        </div>
+
+        <div class="family-arena-layout">
+          <!-- Cột trái: Bàn cờ và thẻ quyền năng -->
+          <div class="family-board-zone">
+            <div class="versus-turn-bar glass-panel" id="versus-turn-indicator">
+              <span class="turn-dot"></span> <span id="turn-text">Hãy bấm bắt đầu trận đấu</span>
+            </div>
+            
+            <div id="versus-chessboard-container" class="versus-chessboard-container">
+              <!-- Bàn cờ hai người chơi sẽ hiển thị ở đây -->
+              <div class="empty-board-placeholder glass-panel">
+                <span class="placeholder-icon">⚔️</span>
+                <p>Chọn cấu hình bên cạnh và bấm "Bắt đầu cuộc đấu"</p>
+              </div>
+            </div>
+
+            <!-- Khay thẻ quyền năng cho mẹ -->
+            <div class="power-cards-container glass-panel" id="power-cards-area" style="display: none;">
+              <h4>⚡ Thẻ Quyền Năng Của Mẹ (Trắng)</h4>
+              <div class="cards-flex">
+                <button class="power-card-btn" id="card-undo" title="Mẹ đi lại nước cờ trước nếu nhỡ tay">
+                  <span class="card-icon">↩</span>
+                  <span class="card-name">Đi Lại (Còn 2)</span>
+                </button>
+                <button class="power-card-btn" id="card-double" title="Đặc quyền cho Mẹ đi liên tiếp 2 nước cờ">
+                  <span class="card-icon">⚡</span>
+                  <span class="card-name">Đi Đôi (Còn 1)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cột phải: Cấu hình và Bảng điểm vàng -->
+          <div class="family-config-zone">
+            <!-- Form cấu hình trận đấu -->
+            <div class="config-card glass-panel">
+              <h4>⚙️ Cấu Hình Trận Đấu</h4>
+              
+              <div class="form-group">
+                <label for="family-game-mode">Chế độ chơi:</label>
+                <select id="family-game-mode" class="select-control">
+                  <option value="standard">Đấu cờ thường (Tất cả quân)</option>
+                  <option value="pawn_battle">Chiến tranh Xe tăng Tốt (8 Tốt)</option>
+                  <option value="knight_hunt">Mã Trắng của Mẹ săn Tốt Đen</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mother-skill-level">Trình độ của Mẹ (Quân Trắng):</label>
+                <select id="mother-skill-level" class="select-control">
+                  <option value="beginner">Mới học chơi (Đầy đủ thẻ bổ trợ + Hiện gợi ý đi)</option>
+                  <option value="intermediate">Biết cách đi cơ bản (Chỉ thẻ Đi lại + Hiện gợi ý đi)</option>
+                  <option value="advanced">Kỳ thủ thực thụ (Không dùng thẻ + Không gợi ý)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="opponent-skill-level">Trình độ của Bố / Bé (Quân Đen):</label>
+                <select id="opponent-skill-level" class="select-control">
+                  <option value="master">Cao thủ giỏi (Bố - Chấp Mẹ mất quân Hậu!)</option>
+                  <option value="casual">Biết chơi tốt (Bé - Chấp Mẹ mất quân Xe!)</option>
+                  <option value="novice">Đang học chơi (Không chấp quân - Đấu cân bằng)</option>
+                </select>
+              </div>
+
+              <button class="action-btn success-btn" id="start-family-match-btn">⚔️ Bắt Đầu Cuộc Đấu</button>
+            </div>
+
+            <!-- Bảng vàng gia đình -->
+            <div class="scoreboard-card glass-panel">
+              <h4>🏆 Bảng Vàng Gia Đình</h4>
+              
+              <div class="player-names-input">
+                <input type="text" id="kid-name-input" placeholder="Tên Mẹ (Quân Trắng)" value="Mẹ Yêu">
+                <span class="vs-label">VS</span>
+                <input type="text" id="parent-name-input" placeholder="Tên Bố/Bé (Quân Đen)" value="Bố & Bé">
+              </div>
+
+              <div class="score-display">
+                <div class="score-box">
+                  <span class="score-label" id="lbl-kid-name">Mẹ Yêu</span>
+                  <span class="score-num highlight-val" id="kid-score">0</span>
+                  <button class="add-point-btn" id="add-kid-win">Mẹ Thắng +1 ⭐</button>
+                </div>
+                <div class="score-divider">:</div>
+                <div class="score-box">
+                  <span class="score-label" id="lbl-parent-name">Bố & Bé</span>
+                  <span class="score-num" id="parent-score">0</span>
+                  <button class="add-point-btn" id="add-parent-win">Bố/Bé Thắng +1 ⭐</button>
+                </div>
+              </div>
+
+              <button class="action-btn secondary-btn" id="reset-scoreboard-btn" style="padding: 0.5rem; font-size: 0.8rem; margin-top: 10px;">Reset Bảng Điểm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+  </main>
+
+  <!-- Footer chân trang -->
+  <footer class="app-footer glass-panel">
+    <p>© 2026 ChessFamily - Dành trọn tình yêu thương cho thế hệ tương lai. Phát triển bởi Antigravity.</p>
+  </footer>
+
+  <!-- Gọi các Scripts liên quan -->
+  <script src="lessons.js"></script>
+  <script src="chess-logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
