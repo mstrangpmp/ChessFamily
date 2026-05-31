@@ -661,7 +661,7 @@ class AppCoordinator {
     box.innerHTML = `
       <div class="victory-crown">👑</div>
       <h2>Chúc Mừng Chiến Thắng!</h2>
-      <p class="victory-msg">${message}</p>
+      <p class="victory-msg">${this.parseMarkdown(message)}</p>
     `;
 
     const closeBtn = document.createElement("button");
