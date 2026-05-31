@@ -130,22 +130,21 @@ html, body {
 
 /* Main Layout */
 .main-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: block; /* Khối thuần túy giúp chống tràn tuyệt đối trên di động */
   width: 100%;
   padding: 0 10px;
   margin: 0 auto 2rem auto;
   max-width: 100%;
-  overflow: hidden;
 }
 
 /* Sidebar Danh sách bài học */
 .sidebar-panel {
+  display: block;
   padding: 1rem;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  margin-bottom: 1.5rem;
 }
 
 .sidebar-header {
@@ -239,9 +238,7 @@ html, body {
 
 /* 4. Khung Hiển thị Nội dung chính */
 .main-display-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: block;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
