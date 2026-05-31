@@ -1,9 +1,10 @@
 /* ==========================================================================
-   style.css
-   Hệ thống thiết kế giao diện Emerald Dark cao cấp tích hợp Glassmorphism,
-   hiệu ứng chuyển động mượt mà và bàn cờ tương tác 3D cho ChessFamily.
+   style.css (Mobile-First Architecture)
+   Hệ thống thiết kế Emerald Dark Glassmorphism, tối ưu hóa di động tuyệt đối
+   và nâng cấp tự động lên PC thông qua Media Queries.
    ========================================================================== */
-/* 1. Thiết lập biến màu sắc & Layout */
+
+/* 1. Thiết lập Biến Màu sắc & Tokens */
 :root {
   --font-heading: 'Lexend', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -23,10 +24,10 @@
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   
-  /* Bàn cờ cổ điển sang trọng */
-  --sq-light: #e2e8f0;           /* Soft Sand Light */
-  --sq-dark: #0f5132;            /* Deep Pine Green Dark */
-  --sq-selected: rgba(59, 130, 246, 0.4); /* Blue highlights */
+  /* Màu sắc ô cờ */
+  --sq-light: #e2e8f0;           /* Soft Sand */
+  --sq-dark: #0f5132;            /* Deep Pine Green */
+  --sq-selected: rgba(59, 130, 246, 0.4);
   
   --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
@@ -39,85 +40,21 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.6;
-  overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
   background-attachment: fixed;
 }
 
-/* 2. Cấu trúc Layout chính */
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 5%;
-  margin: 1.5rem auto;
-  width: 90%;
-  max-width: 1400px;
-  border-radius: 16px;
-}
-
-.header-brand {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo-emoji {
-  font-size: 2.5rem;
-  animation: float 3s ease-in-out infinite;
-}
-
-.brand-text h1 {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, var(--color-primary-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.brand-tagline {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.header-achievements {
-  display: flex;
-  gap: 1rem;
-}
-
-.achievement-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-secondary);
-}
-
-/* Main Layout Grid */
-.main-layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 1.5rem;
-  width: 90%;
-  max-width: 1400px;
-  margin: 0 auto 3rem auto;
-  min-height: 70vh;
-}
-
-/* 3. Panel Glassmorphism */
+/* 2. Cấu trúc Panel Glassmorphism */
 .glass-panel {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
@@ -132,48 +69,120 @@ body {
   border-color: var(--border-glow);
 }
 
-/* 4. Sidebar bài học */
-.sidebar-panel {
-  padding: 1.5rem;
+/* 3. MOBILE-FIRST BASE STYLES (Mặc định cho Điện thoại di động) */
+
+/* App Header */
+.app-header {
   display: flex;
   flex-direction: column;
-  height: max-content;
-  position: sticky;
-  top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 95%;
+  text-align: center;
+}
+
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-emoji {
+  font-size: 2.2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.brand-text h1 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-primary-hover) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-tagline {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.header-achievements {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.achievement-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+/* Main Layout */
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 0 10px;
+  margin: 0 auto 2rem auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar Danh sách bài học */
+.sidebar-panel {
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .sidebar-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
 }
 
 .sidebar-header h2 {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 700;
 }
 
 .sidebar-header p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .sidebar-scroll {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.75rem;
-  max-height: 550px;
-  overflow-y: auto;
-  padding-right: 5px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 
 /* Nút bài học */
 .lesson-item-btn {
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: 0.9rem 1.2rem;
+  width: 250px;
+  flex-shrink: 0;
+  padding: 0.8rem 1rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
   border-radius: 10px;
@@ -181,20 +190,18 @@ body {
   text-align: left;
   cursor: pointer;
   transition: var(--transition-smooth);
-  position: relative;
-  gap: 10px;
+  gap: 8px;
 }
 
 .lesson-item-btn:hover:not(.locked) {
   background: rgba(16, 185, 129, 0.1);
   border-color: var(--color-primary);
-  transform: translateX(4px);
 }
 
 .lesson-item-btn.active {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
   border-color: var(--color-primary);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
 }
 
 .lesson-item-btn.locked {
@@ -204,18 +211,18 @@ body {
 
 .lesson-num {
   font-family: var(--font-heading);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--color-primary);
   background: rgba(16, 185, 129, 0.15);
-  padding: 0.2rem 0.5rem;
+  padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
 
 .lesson-title-text {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   flex-grow: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -223,40 +230,53 @@ body {
 }
 
 .lock-icon, .check-icon {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .check-icon {
   color: var(--color-primary);
 }
 
-/* 5. Khung hiển thị nội dung chính */
+/* 4. Khung Hiển thị Nội dung chính */
 .main-display-panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-/* Tabs Navigation */
+/* Tabs Navigation - Trượt ngang mượt mà chuẩn Mobile App */
 .tabs-navigation {
   display: flex;
   padding: 0.4rem;
-  gap: 0.5rem;
+  gap: 0.3rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  justify-content: flex-start;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.tabs-navigation::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-nav-btn {
-  flex: 1;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem;
+  gap: 0.2rem;
+  padding: 0.5rem 0.8rem;
   background: transparent;
   border: none;
   border-radius: 10px;
   color: var(--text-muted);
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition-smooth);
@@ -273,11 +293,18 @@ body {
   box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.1);
 }
 
+.tab-icon {
+  font-size: 0.95rem;
+}
+
 /* Tab Panels */
 .tab-content-panel {
   display: none;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .tab-content-panel.active {
@@ -287,85 +314,85 @@ body {
 
 /* Thẻ lý thuyết bài học */
 .lesson-intro-section {
-  padding: 2rem;
+  padding: 1.2rem;
 }
 
 .lesson-intro-section h2 {
   font-family: var(--font-heading);
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   margin-bottom: 0.25rem;
 }
 
 .lesson-intro-section h3 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .lesson-intro-text {
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
 }
 
 .lesson-sections-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .lesson-card {
-  padding: 1.5rem;
+  padding: 1.2rem;
   position: relative;
 }
 
 .card-title {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .bullet-num {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--color-primary);
 }
 
 .card-value-badge {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.5rem;
   background: rgba(245, 158, 11, 0.15);
   color: var(--color-secondary);
   border-radius: 4px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .card-desc {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
 .card-comparison-box, .card-benefit-box, .card-tip-box {
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 8px;
-  font-size: 0.9rem;
-  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
 }
 
 .card-comparison-box {
@@ -386,47 +413,25 @@ body {
   color: #fde047;
 }
 
-/* 6. BÀN CỜ TƯƠNG TÁC (CHESSBOARD INTERACTION STYLE) */
-.interactive-practice-area {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 1.5rem;
-}
+/* 5. BÀN CỜ TƯƠNG TÁC (CHESSBOARD BASE STYLE) */
 
-.practice-header {
-  grid-column: 1 / -1;
-  padding: 1rem;
-}
-
-.practice-title {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-.practice-instruction {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-/* Khung bọc bàn cờ */
 .active-chessboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 4px;
 }
 
+/* Chessboard wrapper co giãn hoàn hảo */
 .chess-board-wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 8px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.05);
 }
 
 .chess-board-grid {
@@ -444,26 +449,18 @@ body {
   align-items: center;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.2s ease;
 }
 
-.board-square.light {
-  background-color: var(--sq-light);
-}
+.board-square.light { background-color: var(--sq-light); }
+.board-square.dark { background-color: var(--sq-dark); }
 
-.board-square.dark {
-  background-color: var(--sq-dark);
-}
-
-/* Ô cờ khi được chọn */
 .board-square.selected {
-  box-shadow: inset 0 0 0 4px rgba(59, 130, 246, 0.8);
+  box-shadow: inset 0 0 0 3px rgba(59, 130, 246, 0.8);
 }
 
-/* Quân cờ SVG */
 .piece-container {
-  width: 80%;
-  height: 80%;
+  width: 82%;
+  height: 82%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -473,15 +470,14 @@ body {
 .piece-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.35));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .board-square:hover .piece-svg {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
-/* Gợi ý nước đi */
 .move-indicator {
   position: absolute;
   width: 25%;
@@ -497,26 +493,23 @@ body {
   display: block;
 }
 
-/* Gợi ý ăn quân/sao */
 .board-square.legal-capture::after {
   content: "";
   position: absolute;
   width: 80%;
   height: 80%;
   border-radius: 50%;
-  border: 4px solid var(--color-danger);
+  border: 3px solid var(--color-danger);
   animation: pulse 1.5s infinite;
   z-index: 3;
   pointer-events: none;
 }
 
-/* Vị trí sao trên bàn cờ */
 .board-square.has-star .piece-container svg {
   animation: starRotate 4s linear infinite;
-  filter: drop-shadow(0 0 8px #f59e0b);
+  filter: drop-shadow(0 0 6px #f59e0b);
 }
 
-/* Overlay vẽ các mũi tên SVG */
 .arrows-overlay {
   position: absolute;
   top: 0;
@@ -527,69 +520,76 @@ body {
   z-index: 10;
 }
 
-/* Nhãn tọa độ cờ */
 .coordinate-label {
   position: absolute;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.35);
   pointer-events: none;
   z-index: 1;
 }
 
-.rank-label {
-  top: 2px;
-  left: 4px;
-}
+.rank-label { top: 2px; left: 3px; }
+.file-label { bottom: 2px; right: 3px; }
 
-.file-label {
-  bottom: 2px;
-  right: 4px;
-}
-
-/* Bảng điều khiển / Trạng thái cờ */
-.practice-controls {
-  padding: 1.5rem;
+/* 6. LUYỆN TẬP VÀ ĐIỀU KHIỂN (PRACTICE LAYOUT) */
+.interactive-practice-area {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  height: max-content;
+  width: 100%;
+}
+
+.practice-header {
+  padding: 0.5rem 0.2rem;
+}
+
+.practice-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.practice-instruction {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.practice-controls {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
 }
 
 .star-tracker h4, .practice-controls h4 {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
 }
 
 .tracker-item {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
 }
 
-.tracker-val {
-  font-weight: 700;
-}
-
-.highlight-val {
-  color: var(--color-secondary);
-}
-
-.gold-text {
-  color: var(--color-secondary);
-}
+.tracker-val { font-weight: 700; }
+.highlight-val { color: var(--color-secondary); }
+.gold-text { color: var(--color-secondary); }
 
 .progress-bar-container {
   width: 100%;
-  height: 8px;
+  height: 7px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   overflow: hidden;
-  margin: 0.5rem 0;
+  margin: 0.4rem 0;
 }
 
 .progress-bar-fill {
@@ -604,21 +604,20 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.75rem;
   background: linear-gradient(135deg, var(--color-primary) 0%, #059669 100%);
   border: none;
   border-radius: 10px;
   color: #fff;
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: var(--transition-smooth);
 }
 
 .action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
 }
 
 .secondary-btn {
@@ -627,84 +626,304 @@ body {
   color: var(--text-main);
 }
 
-.secondary-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: none;
+.secondary-btn:hover { background: rgba(255, 255, 255, 0.08); }
+.success-btn { background: linear-gradient(135deg, var(--color-secondary) 0%, #d97706 100%); }
+
+/* 7. ĐẤU TRƯỜNG GIA ĐÌNH & BẢNG ĐIỂM (VERSUS LAYOUT) */
+.family-intro-box {
+  padding: 1rem 1.2rem;
 }
 
-.success-btn {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, #d97706 100%);
+.family-intro-box h2 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
 }
 
-.success-btn:hover {
-  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+.family-intro-box p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
-/* 7. Trắc nghiệm (Quiz Styles) */
+.family-arena-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.family-board-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.versus-turn-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.turn-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.turn-dot.white-turn { background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+.turn-dot.black-turn { background: var(--color-primary); box-shadow: 0 0 10px var(--color-primary); }
+
+.versus-chessboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.empty-board-placeholder {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.placeholder-icon {
+  font-size: 3rem;
+  animation: pulse 2s infinite;
+}
+
+.empty-board-placeholder p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Thẻ quyền năng */
+.power-cards-container {
+  padding: 1rem;
+  width: 100%;
+}
+
+.power-cards-container h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-secondary);
+}
+
+.cards-flex {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.power-card-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  gap: 2px;
+}
+
+.power-card-btn:hover:not(.used) {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--color-secondary);
+}
+
+.power-card-btn.used {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.power-card-btn .card-icon { font-size: 1.2rem; }
+.power-card-btn .card-name { font-size: 0.75rem; font-weight: 700; }
+
+/* Khu cấu hình đấu trường */
+.family-config-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.config-card, .scoreboard-card {
+  padding: 1rem;
+}
+
+.config-card h4, .scoreboard-card h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 0.4rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.select-control {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Bảng điểm vàng gia đình */
+.player-names-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.player-names-input input {
+  flex: 1;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  text-align: center;
+  outline: none;
+  width: 45%;
+}
+
+.player-names-input input:focus {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.vs-label {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--color-danger);
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  border: 1px solid var(--border-glass);
+  margin-bottom: 0.4rem;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.score-num { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; }
+.score-divider { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-muted); }
+
+.add-point-btn {
+  padding: 0.25rem 0.5rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 4px;
+  color: var(--color-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.add-point-btn:hover {
+  background: var(--color-secondary);
+  color: #fff;
+  transform: scale(1.03);
+}
+
+/* 8. TRẮC NGHIỆM (QUIZ STYLE) */
 .quiz-instruction-box {
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.2rem;
 }
 
 .quiz-instruction-box h2 {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.3rem;
 }
 
 .quiz-questions-scroll {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
-.quiz-question-card {
-  padding: 1.5rem;
-}
-
-.quiz-q-num {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-primary);
-  margin-bottom: 0.5rem;
-}
-
-.quiz-q-text {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.quiz-options-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+.quiz-question-card { padding: 1rem; }
+.quiz-q-num { font-size: 0.7rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.3rem; }
+.quiz-q-text { font-family: var(--font-heading); font-size: 1rem; font-weight: 600; margin-bottom: 0.8rem; }
+.quiz-options-grid { display: flex; flex-direction: column; gap: 0.6rem; }
 
 .quiz-option-label {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0.8rem 1.2rem;
+  gap: 8px;
+  padding: 0.6rem 0.8rem;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-glass);
   border-radius: 8px;
   cursor: pointer;
+  font-size: 0.85rem;
   transition: var(--transition-smooth);
 }
 
-.quiz-option-label:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
-}
+.quiz-option-label:hover { background: rgba(255, 255, 255, 0.05); }
+.quiz-radio { accent-color: var(--color-primary); transform: scale(1.05); }
 
-.quiz-radio {
-  accent-color: var(--color-primary);
-  transform: scale(1.1);
-}
-
-/* Trắc nghiệm Đúng/Sai */
 .quiz-option-label.correct {
   background: rgba(16, 185, 129, 0.12);
   border-color: var(--color-primary);
@@ -718,40 +937,25 @@ body {
 }
 
 .quiz-feedback-box {
-  margin-top: 1rem;
-  padding: 0.8rem 1.2rem;
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: none;
-  animation: slideInDown 0.3s ease-out;
 }
 
-.success-feedback {
-  background: rgba(16, 185, 129, 0.08);
-  border-left: 3px solid var(--color-primary);
-  color: #6ee7b7;
-}
-
-.fail-feedback {
-  background: rgba(239, 68, 68, 0.08);
-  border-left: 3px solid var(--color-danger);
-  color: #fca5a5;
-}
-
-.warning-feedback {
-  background: rgba(245, 158, 11, 0.08);
-  border-left: 3px solid var(--color-secondary);
-  color: #fde047;
-}
+.success-feedback { background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--color-primary); color: #6ee7b7; }
+.fail-feedback { background: rgba(239, 68, 68, 0.08); border-left: 3px solid var(--color-danger); color: #fca5a5; }
+.warning-feedback { background: rgba(245, 158, 11, 0.08); border-left: 3px solid var(--color-secondary); color: #fde047; }
 
 .quiz-submit-btn {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   align-self: flex-start;
   width: auto;
-  padding: 1rem 2.5rem;
+  padding: 0.8rem 2rem;
 }
 
-/* 8. MODAL / OVERLAYS ĂN MỪNG CHIẾN THẮNG */
+/* 9. MODALS / ĂN MỪNG / TOASTS */
 .victory-overlay {
   position: absolute;
   top: 0;
@@ -768,46 +972,31 @@ body {
 }
 
 .victory-box {
-  width: 80%;
-  max-width: 380px;
-  padding: 2.5rem;
+  width: 85%;
+  max-width: 350px;
+  padding: 2rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-.victory-crown {
-  font-size: 3rem;
-  animation: pulse 1.5s infinite;
-}
-
-.victory-box h2 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--color-secondary);
-}
-
-.victory-msg {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
+.victory-crown { font-size: 2.5rem; animation: pulse 1.5s infinite; }
+.victory-box h2 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--color-secondary); }
+.victory-msg { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
 
 .new-unlock-badge {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid var(--color-primary);
   color: var(--text-main);
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.2rem;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Canvas pháo hoa */
 .confetti-canvas {
   position: fixed;
   top: 0;
@@ -818,66 +1007,62 @@ body {
   z-index: 1000;
 }
 
-/* Popup thông báo thành tựu */
 .achievement-toast {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
+  gap: 0.6rem;
+  padding: 0.8rem 1.2rem;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid var(--color-secondary);
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   z-index: 2000;
 }
 
-.toast-icon {
-  font-size: 1.8rem;
+.toast-icon { font-size: 1.5rem; }
+.toast-title { font-size: 0.7rem; color: var(--color-secondary); font-weight: 700; text-transform: uppercase; }
+.toast-name { font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin: 2rem auto 0 auto;
+  width: 100%;
+  max-width: 100%;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
-.toast-title {
-  font-size: 0.75rem;
-  color: var(--color-secondary);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.toast-name {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--text-main);
-}
-
-/* 9. Hiệu ứng Hoạt ảnh @keyframes */
+/* 10. Hoạt Ảnh Keyframes */
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
 }
 
 @keyframes pulse {
   0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 0.4; }
+  50% { transform: scale(1.06); opacity: 0.45; }
   100% { transform: scale(1); opacity: 0.8; }
 }
 
 @keyframes starRotate {
   0% { transform: scale(0.9) rotate(0deg); }
-  50% { transform: scale(1.05) rotate(180deg); }
+  50% { transform: scale(1.04) rotate(180deg); }
   100% { transform: scale(0.9) rotate(360deg); }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0px); }
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.9); opacity: 0; }
+  from { transform: scale(0.92); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
@@ -887,548 +1072,154 @@ body {
 }
 
 .animated {
-  animation-duration: 0.4s;
+  animation-duration: 0.35s;
   animation-fill-mode: both;
   animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .animated.scaleUp { animation-name: scaleUp; }
 .animated.slideInRight { animation-name: slideInRight; }
 
-/* 9.1 ĐẤU TRƯỜNG GIA ĐÌNH (FAMILY VERSUS ARENA STYLES) */
-.family-intro-box {
-  padding: 1.5rem 2rem;
-}
 
-.family-intro-box h2 {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  margin-bottom: 0.25rem;
-}
+/* ==========================================================================
+   11. DESKTOP-FIRST OVERRIDES (Áp dụng cho PC / Laptop có màn hình lớn)
+   ========================================================================== */
 
-.family-intro-box p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.family-arena-layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.family-board-zone {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* Thanh chỉ thị lượt đi */
-.versus-turn-bar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0.9rem 1.5rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.turn-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--text-muted);
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  transition: var(--transition-smooth);
-}
-
-.turn-dot.white-turn {
-  background: #ffffff;
-  box-shadow: 0 0 12px #ffffff;
-}
-
-.turn-dot.black-turn {
-  background: var(--color-primary);
-  box-shadow: 0 0 12px var(--color-primary);
-}
-
-/* Container chứa bàn cờ giao đấu */
-.versus-chessboard-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.empty-board-placeholder {
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem;
-  text-align: center;
-}
-
-.placeholder-icon {
-  font-size: 4rem;
-  animation: pulse 2s infinite;
-}
-
-.empty-board-placeholder p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-/* Khay thẻ quyền năng của bé */
-.power-cards-container {
-  padding: 1.2rem 1.5rem;
-}
-
-.power-cards-container h4 {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: var(--color-secondary);
-}
-
-.cards-flex {
-  display: flex;
-  gap: 1rem;
-}
-
-.power-card-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem;
-  background: rgba(245, 158, 11, 0.05);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  border-radius: 10px;
-  color: var(--text-main);
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  gap: 4px;
-}
-
-.power-card-btn:hover:not(.used) {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: var(--color-secondary);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.15);
-}
-
-.power-card-btn.used {
-  opacity: 0.25;
-  cursor: not-allowed;
-  background: rgba(255, 255, 255, 0.02);
-  border-color: var(--border-glass);
-}
-
-.power-card-btn .card-icon {
-  font-size: 1.5rem;
-}
-
-.power-card-btn .card-name {
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-/* Khu vực cấu hình */
-.family-config-zone {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.config-card, .scoreboard-card {
-  padding: 1.5rem;
-}
-
-.config-card h4, .scoreboard-card h4 {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 0.5rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 1.2rem;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.select-control {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid var(--border-glass);
-  border-radius: 8px;
-  color: var(--text-main);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  outline: none;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.select-control:focus {
-  border-color: var(--color-primary);
-}
-
-.handicap-options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.handicap-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  color: var(--text-main);
-}
-
-.handicap-label input {
-  accent-color: var(--color-primary);
-}
-
-/* Bảng điểm vàng */
-.player-names-input {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 1.2rem;
-}
-
-.player-names-input input {
-  flex: 1;
-  padding: 0.6rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-glass);
-  border-radius: 6px;
-  color: var(--text-main);
-  font-size: 0.85rem;
-  text-align: center;
-  outline: none;
-  width: 40%;
-}
-
-.player-names-input input:focus {
-  border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.vs-label {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 0.8rem;
-  color: var(--color-danger);
-}
-
-.score-display {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 10px;
-  border: 1px solid var(--border-glass);
-  margin-bottom: 0.5rem;
-}
-
-.score-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-  text-align: center;
-}
-
-.score-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  white-space: nowrap;
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.score-num {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  font-weight: 800;
-}
-
-.score-divider {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--text-muted);
-}
-
-.add-point-btn {
-  padding: 0.3rem 0.6rem;
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 4px;
-  color: var(--color-secondary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.add-point-btn:hover {
-  background: var(--color-secondary);
-  color: #fff;
-  transform: scale(1.05);
-}
-
-/* Hỗ trợ responsive cho tab Đấu Trường */
-@media (max-width: 768px) {
-  .family-arena-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* 10. Footer */
-.app-footer {
-  text-align: center;
-  padding: 1.5rem;
-  margin: 3rem auto 0 auto;
-  width: 90%;
-  max-width: 1400px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* 11. RESPONSIVE DESIGN (PC -> TABLET -> MOBILE) */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-@media (max-width: 1024px) {
-  .main-layout {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
-  .sidebar-panel {
-    position: relative;
-    top: 0;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .sidebar-scroll {
+@media (min-width: 768px) {
+  /* Tùy chỉnh Header */
+  .app-header {
     flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 10px;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
+    justify-content: space-between;
+    padding: 1rem 3%;
+    margin: 1.5rem auto;
+    width: 90%;
+    max-width: 1400px;
+    border-radius: 16px;
   }
 
-  .lesson-item-btn {
-    width: 250px;
-    flex-shrink: 0;
-  }
-
-  .main-display-panel {
-    max-width: 100%;
-    overflow: hidden;
-  }
-}
-
-@media (max-width: 768px) {
-  .app-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
   .header-brand {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1rem;
   }
 
-  .main-layout {
-    width: 100%;
-    padding: 0 1rem;
-    margin: 0 auto 2rem auto;
-  }
+  .logo-emoji { font-size: 2.5rem; }
+  .brand-text h1 { font-size: 1.8rem; }
+  .brand-tagline { font-size: 0.85rem; }
 
-  /* Kích hoạt thanh Tab trượt ngang mượt mà, chuẩn Mobile App */
-  .tabs-navigation {
-    overflow-x: auto;
-    white-space: nowrap;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    gap: 0.3rem;
-    scrollbar-width: none; /* Firefox */
-    max-width: 100%;
-  }
-
-  .tabs-navigation::-webkit-scrollbar {
-    display: none; /* Safari & Chrome */
-  }
-
+  /* Tab Navigation */
   .tab-nav-btn {
-    flex: 0 0 auto;
-    font-size: 0.85rem;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .interactive-practice-area {
-    grid-template-columns: 1fr;
-  }
-
-  .chess-board-wrapper {
-    width: 100%;
-    max-width: 480px;
-  }
-
-  .practice-controls {
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-header {
-    padding: 1rem;
-    margin: 1rem auto;
-    width: 95%;
-  }
-
-  .brand-text h1 {
-    font-size: 1.5rem;
-  }
-
-  .tab-nav-btn {
-    font-size: 0.78rem;
-    padding: 0.5rem 0.7rem;
-    gap: 0.2rem;
-  }
-
-  .tab-icon {
+    flex: 1;
     font-size: 0.95rem;
-  }
-
-  .lesson-intro-section {
-    padding: 1.2rem;
-  }
-
-  .lesson-intro-section h2 {
-    font-size: 1.4rem;
-  }
-
-  .lesson-card {
-    padding: 1.2rem;
-  }
-
-  .card-title {
-    font-size: 1.1rem;
-  }
-
-  .practice-header {
-    padding: 0.5rem;
-  }
-
-  .practice-title {
-    font-size: 1.2rem;
-  }
-
-  /* Thu gọn padding của các thẻ cấu hình trên di động */
-  .config-card, .scoreboard-card {
-    padding: 1rem;
-  }
-
-  /* Giảm khoảng cách phần đặt tên và điểm số gia đình */
-  .player-names-input {
-    gap: 4px;
-  }
-
-  .player-names-input input {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  /* Giảm kích thước vòng bóng đổ cờ để tránh tràn viền */
-  .active-chessboard-container {
-    padding: 4px;
-  }
-
-  .chess-board-wrapper {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.05);
-  }
-
-  .versus-turn-bar {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    gap: 8px;
-  }
-
-  /* Khay thẻ quyền năng co giãn đẹp mắt */
-  .power-cards-container {
-    padding: 1rem;
-  }
-
-  .cards-flex {
+    padding: 0.8rem;
     gap: 0.5rem;
   }
 
-  .power-card-btn {
-    padding: 0.5rem;
+  .tab-icon { font-size: 1rem; }
+
+  /* Practice Zone */
+  .interactive-practice-area {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1.5rem;
   }
 
   .practice-controls {
-    padding: 1rem;
+    padding: 1.5rem;
+    gap: 1.2rem;
   }
 
-  .quiz-instruction-box {
-    padding: 1rem 1.2rem;
+  /* Versus Zone */
+  .family-arena-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.5rem;
   }
 
-  .quiz-instruction-box h2 {
-    font-size: 1.3rem;
-  }
-
-  .quiz-question-card {
-    padding: 1rem;
-  }
-
-  .quiz-q-text {
+  .versus-turn-bar {
+    padding: 0.9rem 1.5rem;
     font-size: 1rem;
+    gap: 12px;
   }
 
-  .quiz-option-label {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.88rem;
+  .turn-dot { width: 14px; height: 14px; }
+  .power-cards-container { padding: 1.2rem 1.5rem; }
+  .cards-flex { gap: 1rem; }
+  .power-card-btn { padding: 0.75rem; gap: 4px; }
+  .power-card-btn .card-icon { font-size: 1.5rem; }
+  .power-card-btn .card-name { font-size: 0.8rem; }
+
+  .config-card, .scoreboard-card { padding: 1.5rem; }
+  .form-group { gap: 6px; margin-bottom: 1.2rem; }
+  .select-control { font-size: 0.9rem; padding: 0.75rem 1rem; }
+  .player-names-input { gap: 8px; margin-bottom: 1.2rem; }
+  .player-names-input input { padding: 0.6rem; font-size: 0.85rem; }
+  .vs-label { font-size: 0.8rem; }
+  .score-display { padding: 1rem; margin-bottom: 0.5rem; }
+  .score-label { font-size: 0.8rem; max-width: 100px; }
+  .score-num { font-size: 2.2rem; }
+  .score-divider { font-size: 1.8rem; }
+  .add-point-btn { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+
+  /* Bàn cờ luyện tập */
+  .active-chessboard-container { padding: 10px; }
+  .chess-board-wrapper {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 8px rgba(255, 255, 255, 0.05);
   }
 }
 
+@media (min-width: 1024px) {
+  /* Layout chính thành 2 cột: Sidebar trái & Nội dung phải */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 1400px;
+    padding: 0;
+    margin: 0 auto 3rem auto;
+  }
+
+  /* Sidebar chuyển thành cột đứng cố định (Sticky) */
+  .sidebar-panel {
+    padding: 1.5rem;
+    height: max-content;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .sidebar-scroll {
+    flex-direction: column;
+    max-height: 550px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 0;
+  }
+
+  .lesson-item-btn {
+    width: 100%;
+    flex-shrink: 1;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .lesson-title-text { font-size: 0.9rem; }
+  .lesson-num { font-size: 0.75rem; padding: 0.2rem 0.5rem; }
+
+  /* Khung nội dung lớn */
+  .lesson-intro-section { padding: 2rem; }
+  .lesson-intro-section h2 { font-size: 1.8rem; }
+  .lesson-intro-section h3 { font-size: 1rem; margin-bottom: 1rem; }
+  .lesson-intro-text { font-size: 0.95rem; }
+
+  .lesson-card { padding: 1.5rem; }
+  .card-title { font-size: 1.2rem; }
+  .bullet-num { width: 28px; height: 28px; font-size: 0.85rem; }
+  .card-value-badge { font-size: 0.75rem; margin-bottom: 0.75rem; }
+  .card-desc { font-size: 0.95rem; margin-bottom: 1rem; }
+
+  .app-footer {
+    padding: 1.5rem;
+    margin: 3rem auto 0 auto;
+    width: 90%;
+    max-width: 1400px;
+    font-size: 0.85rem;
+  }
+}
