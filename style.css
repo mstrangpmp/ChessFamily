@@ -420,14 +420,16 @@ html, body {
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 100%;
   padding: 4px;
+  overflow: hidden;
 }
 
 /* Chessboard wrapper co giãn hoàn hảo */
 .chess-board-wrapper {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: min(440px, 100%);
   aspect-ratio: 1 / 1;
   border-radius: 12px;
   overflow: hidden;
@@ -689,7 +691,7 @@ html, body {
 
 .empty-board-placeholder {
   width: 100%;
-  max-width: 440px;
+  max-width: min(440px, 100%);
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
@@ -813,6 +815,7 @@ html, body {
 
 .player-names-input input {
   flex: 1;
+  min-width: 0;
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-glass);
@@ -821,7 +824,6 @@ html, body {
   font-size: 0.8rem;
   text-align: center;
   outline: none;
-  width: 45%;
 }
 
 .player-names-input input:focus {
