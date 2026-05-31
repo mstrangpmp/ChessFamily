@@ -392,6 +392,213 @@ html, body {
   text-shadow: 0 0 8px rgba(245, 158, 11, 0.15);
 }
 
+/* Khung hiển thị quân cờ SVG trong thẻ lý thuyết bài học (Hỗ trợ song hành Trắng - Đen) */
+.lesson-card-pieces-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 8px 12px;
+  float: right;
+  margin-left: 1.2rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.05);
+  transition: var(--transition-smooth);
+  z-index: 5;
+}
+
+.lesson-card-pieces-container:hover {
+  transform: scale(1.08) translateY(-2px);
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 28px rgba(16, 185, 129, 0.22);
+}
+
+.piece-box-inner {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.piece-box-inner svg {
+  width: 100%;
+  height: 100%;
+}
+
+.piece-box-inner.white-piece svg path {
+  fill: #ffffff !important;
+  stroke: #000000 !important;
+  stroke-width: 1.5 !important;
+}
+
+.piece-box-inner.black-piece svg path {
+  fill: #313131 !important;
+  stroke: #ffffff !important;
+  stroke-width: 1.5 !important;
+}
+
+/* Thư Viện Binh Chủng Tương Tác */
+.piece-showcase-container {
+  padding: 1.2rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-glass);
+  transition: var(--transition-smooth);
+  width: 100%;
+}
+
+.piece-showcase-container:hover {
+  border-color: var(--border-glow);
+}
+
+.showcase-header {
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.showcase-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.3rem;
+}
+
+.showcase-header p {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.piece-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột trên di động để gọn gàng */
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.showcase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.3rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.showcase-item:hover {
+  transform: translateY(-4px);
+  background: rgba(16, 185, 129, 0.08);
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2);
+}
+
+.showcase-pieces {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.showcase-svg {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.showcase-svg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-svg.white-piece-icon svg path {
+  fill: #ffffff !important;
+  stroke: #000000 !important;
+  stroke-width: 1.5 !important;
+}
+
+.showcase-svg.black-piece-icon svg path {
+  fill: #313131 !important;
+  stroke: #ffffff !important;
+  stroke-width: 1.5 !important;
+}
+
+.showcase-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.showcase-name {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.showcase-value {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 1px 5px;
+  border-radius: 20px;
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+
+/* Lớp phát sáng nhấp nháy khi cuộn đến thẻ lý thuyết cờ */
+.highlight-card {
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.35) !important;
+  transform: scale(1.02);
+  z-index: 10;
+}
+
+/* Animation float nhấp nhô chậm rãi */
+.animated-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Override responsive cho Grid showcase trên thiết bị màn hình rộng hơn */
+@media (min-width: 768px) {
+  .piece-showcase-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+  .showcase-item {
+    padding: 1rem 0.5rem;
+  }
+  .showcase-svg {
+    width: 36px;
+    height: 36px;
+  }
+  .showcase-name {
+    font-size: 0.8rem;
+  }
+  .showcase-value {
+    font-size: 0.7rem;
+  }
+}
+
 .card-comparison-box, .card-benefit-box, .card-tip-box {
   padding: 0.6rem 0.8rem;
   border-radius: 8px;

@@ -29,6 +29,23 @@ class AppCoordinator {
     this.doubleMoveCharges = 1;
     this.doubleMoveActive = false;
 
+    // Dữ liệu hình ảnh SVG quân cờ phục vụ minh họa bài học lý thuyết
+    this.pieceSVGs = {
+      wP: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M22.5 9c-2.21 0-4 1.79-4 4 0 .89.29 1.71.78 2.38C17.33 16.5 16 18.59 16 21c0 2.03.94 3.84 2.41 5.03-.83.65-1.41 1.63-1.41 2.75 0 1.25.68 2.33 1.69 2.91C17.15 32.14 16 33.93 16 36v1h13v-1c0-2.07-1.15-3.86-2.69-4.31 1.01-.58 1.69-1.66 1.69-2.91 0-1.12-.58-2.1-1.41-2.75 1.47-1.19 2.41-3 2.41-5.03 0-2.41-1.33-4.5-3.28-5.62.49-.67.78-1.49.78-2.38 0-2.21-1.79-4-4-4z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+      wN: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M 22,10 C 22,10 19,11 16,15 C 13,19 13,23 13,23 C 13,23 14,20 18,20 C 18,20 17,21 15,24 C 13,27 13,31 13,31 C 13,31 15,29 18,29 C 17,30 16,32 16,34 C 16,36 19,38 22,38 C 25,38 27,35 29,35 C 31,35 32,37 32,37 C 32,37 31,33 30,30 C 32,26 32,19 29,15 C 26,11 22,10 22,10 z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" fill="#000000" transform="matrix(0.861785,0.507281,-0.507281,0.861785,27.4208,-4.2754)"/></svg>`,
+      wB: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M9 36c3.39 0 7.66-.69 11.77-2.3 4 1.51 8.08 2.22 11.51 2.24.64.01 1.13-.53 1.14-1.18V33.5c0-.6-.44-1.11-1.04-1.18C28.2 31.85 25 30 22.5 27.5c0 0-2.5 2.5-6.5 4.5-2.73.91-5.73 1.18-7.96 1.32-.6.04-1.04.54-1.04 1.14V35c0 .55.45 1 1 1zM22.5 8c-3.04 0-5.5 2.46-5.5 5.5 0 1.93 1.05 3.61 2.59 4.54C16.92 20.31 15 23.93 15 28c0 .55.45 1 1 1h13c.55 0 1-.45 1-1 0-4.07-1.92-7.69-4.59-9.96 1.54-.93 2.59-2.61 2.59-4.54 0-3.04-2.46-5.5-5.5-5.5z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.5" cy="5" r="2" fill="#ffffff" stroke="#000000" stroke-width="1.5"/></svg>`,
+      wR: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M9 39h27v-3H9v3zm3-13v7h21v-7H12zm2.5-11h16V9H26v3.5h-7V9h-4.5v6zm-.5 11h17v-8H14v8z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+      wQ: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M8 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM22.5 14a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" fill="#ffffff" stroke="#000000" stroke-width="1.5"/><path d="M9 37h27v-3H9v3zm3.5-21l3 15h14l3-15H12.5z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+      wK: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M22.5 11.63V6M20 8h5M22.5 25c-3.58 0-6.5-2.92-6.5-6.5s2.92-6.5 6.5-6.5 6.5 2.92 6.5 6.5-2.92 6.5-6.5 6.5zM11.5 30c0-4.14 3.36-7.5 7.5-7.5h7c4.14 0 7.5 3.36 7.5 7.5v6h-22v-6z" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+      
+      bP: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M22.5 9c-2.21 0-4 1.79-4 4 0 .89.29 1.71.78 2.38C17.33 16.5 16 18.59 16 21c0 2.03.94 3.84 2.41 5.03-.83.65-1.41 1.63-1.41 2.75 0 1.25.68 2.33 1.69 2.91C17.15 32.14 16 33.93 16 36v1h13v-1c0-2.07-1.15-3.86-2.69-4.31 1.01-.58 1.69-1.66 1.69-2.91 0-1.12-.58-2.1-1.41-2.75 1.47-1.19 2.41-3 2.41-5.03 0-2.41-1.33-4.5-3.28-5.62.49-.67.78-1.49.78-2.38 0-2.21-1.79-4-4-4z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+      bN: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M 22,10 C 22,10 19,11 16,15 C 13,19 13,23 13,23 C 13,23 14,20 18,20 C 18,20 17,21 15,24 C 13,27 13,31 13,31 C 13,31 15,29 18,29 C 17,30 16,32 16,34 C 16,36 19,38 22,38 C 25,38 27,35 29,35 C 31,35 32,37 32,37 C 32,37 31,33 30,30 C 32,26 32,19 29,15 C 26,11 22,10 22,10 z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" fill="#ffffff" transform="matrix(0.861785,0.507281,-0.507281,0.861785,27.4208,-4.2754)"/></svg>`,
+      bB: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M9 36c3.39 0 7.66-.69 11.77-2.3 4 1.51 8.08 2.22 11.51 2.24.64.01 1.13-.53 1.14-1.18V33.5c0-.6-.44-1.11-1.04-1.18C28.2 31.85 25 30 22.5 27.5c0 0-2.5 2.5-6.5 4.5-2.73.91-5.73 1.18-7.96 1.32-.6.04-1.04.54-1.04 1.14V35c0 .55.45 1 1 1zM22.5 8c-3.04 0-5.5 2.46-5.5 5.5 0 1.93 1.05 3.61 2.59 4.54C16.92 20.31 15 23.93 15 28c0 .55.45 1 1 1h13c.55 0 1-.45 1-1 0-4.07-1.92-7.69-4.59-9.96 1.54-.93 2.59-2.61 2.59-4.54 0-3.04-2.46-5.5-5.5-5.5z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.5" cy="5" r="2" fill="#313131" stroke="#ffffff" stroke-width="1.5"/></svg>`,
+      bR: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M9 39h27v-3H9v3zm3-13v7h21v-7H12zm2.5-11h16V9H26v3.5h-7V9h-4.5v6zm-.5 11h17v-8H14v8z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+      bQ: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M8 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM22.5 14a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" fill="#313131" stroke="#ffffff" stroke-width="1.5"/><path d="M9 37h27v-3H9v3zm3.5-21l3 15h14l3-15H12.5z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+      bK: `<svg viewBox="0 0 45 45" class="piece-svg"><path d="M22.5 11.63V6M20 8h5M22.5 25c-3.58 0-6.5-2.92-6.5-6.5s2.92-6.5 6.5-6.5 6.5 2.92 6.5 6.5-2.92 6.5-6.5 6.5zM11.5 30c0-4.14 3.36-7.5 7.5-7.5h7c4.14 0 7.5 3.36 7.5 7.5v6h-22v-6z" fill="#313131" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>`
+    };
+
     this.initDOM();
     this.initAudio();
     this.loadLesson(this.currentLessonIdx);
@@ -256,13 +273,34 @@ class AppCoordinator {
     document.getElementById("active-lesson-subtitle").innerText = lesson.subtitle;
     document.getElementById("active-lesson-intro").innerHTML = this.parseMarkdown(lesson.intro);
 
+    // Kiểm tra và xóa showcase cũ nếu có
+    const oldShowcase = document.getElementById("piece-showcase-box");
+    if (oldShowcase) oldShowcase.remove();
+
     // Vẽ danh sách lý thuyết trong Tab 'Lessons'
     const sectionList = document.getElementById("lesson-sections-list");
     sectionList.innerHTML = "";
     lesson.sections.forEach((sec, sIdx) => {
       const card = document.createElement("div");
       card.className = "lesson-card glass-panel";
+      card.id = `lesson-card-sec-${sIdx}`;
+
+      // Bổ sung hình ảnh quân cờ minh họa ở góc phải (hỗ trợ nhiều quân song hành)
+      const pieceCodes = this.getSectionPieceCodes(idx, sIdx);
+      let pieceImageHTML = "";
+      if (pieceCodes && pieceCodes.length > 0) {
+        let svgsHTML = "";
+        pieceCodes.forEach(pCode => {
+          const svgContent = this.pieceSVGs[pCode];
+          if (svgContent) {
+            svgsHTML += `<div class="piece-box-inner ${pCode[0] === 'w' ? 'white-piece' : 'black-piece'}" title="Quân ${pCode[0] === 'w' ? 'Trắng' : 'Đen'}">${svgContent}</div>`;
+          }
+        });
+        pieceImageHTML = `<div class="lesson-card-pieces-container">${svgsHTML}</div>`;
+      }
+
       card.innerHTML = `
+        ${pieceImageHTML}
         <h3 class="card-title"><span class="bullet-num">${sIdx + 1}</span> ${sec.title}</h3>
         ${sec.value ? `<div class="card-value-badge">${sec.value}</div>` : ""}
         <p class="card-desc">${this.parseMarkdown(sec.desc)}</p>
@@ -272,6 +310,70 @@ class AppCoordinator {
       `;
       sectionList.appendChild(card);
     });
+
+    // Dựng Thư Viện Binh Chủng Tương Tác ở đầu Bài 1
+    if (idx === 0) {
+      const showcaseBox = document.createElement("div");
+      showcaseBox.className = "piece-showcase-container glass-panel animated scaleUp";
+      showcaseBox.id = "piece-showcase-box";
+
+      const showcaseHeader = document.createElement("div");
+      showcaseHeader.className = "showcase-header";
+      showcaseHeader.innerHTML = `
+        <h3>👑 Thư Viện Binh Chủng Cờ Vua</h3>
+        <p>Bấm chọn quân cờ bên dưới để tìm hiểu nhanh cách di chuyển & sức mạnh cốt lõi của quân đó!</p>
+      `;
+      showcaseBox.appendChild(showcaseHeader);
+
+      const showcaseGrid = document.createElement("div");
+      showcaseGrid.className = "piece-showcase-grid";
+
+      const piecesInfo = [
+        { name: "Vua (King)", value: "Vô giá 👑", code: "wK", bCode: "bK", sIdx: 0 },
+        { name: "Hậu (Queen)", value: "9 Điểm ⚡", code: "wQ", bCode: "bQ", sIdx: 1 },
+        { name: "Xe (Rook)", value: "5 Điểm 🏰", code: "wR", bCode: "bR", sIdx: 2 },
+        { name: "Tượng (Bishop)", value: "3 Điểm 🛡️", code: "wB", bCode: "bB", sIdx: 3 },
+        { name: "Mã (Knight)", value: "3 Điểm 🐎", code: "wN", bCode: "bN", sIdx: 4 },
+        { name: "Tốt (Pawn)", value: "1 Điểm 🗡️", code: "wP", bCode: "bP", sIdx: 5 }
+      ];
+
+      piecesInfo.forEach((pInfo, pIdx) => {
+        const item = document.createElement("div");
+        item.className = "showcase-item animated-float";
+        item.style.animationDelay = `${pIdx * 0.08}s`;
+
+        const wSvg = this.pieceSVGs[pInfo.code] || "";
+        const bSvg = this.pieceSVGs[pInfo.bCode] || "";
+
+        item.innerHTML = `
+          <div class="showcase-pieces">
+            <span class="showcase-svg white-piece-icon">${wSvg}</span>
+            <span class="showcase-svg black-piece-icon">${bSvg}</span>
+          </div>
+          <div class="showcase-info">
+            <span class="showcase-name">${pInfo.name}</span>
+            <span class="showcase-value">${pInfo.value}</span>
+          </div>
+        `;
+
+        item.addEventListener("click", () => {
+          this.playMoveSound("promote"); // Tiếng thăng cấp chuông vàng thanh thót
+          const targetCard = document.getElementById(`lesson-card-sec-${pInfo.sIdx}`);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+            targetCard.classList.add("highlight-card");
+            setTimeout(() => {
+              targetCard.classList.remove("highlight-card");
+            }, 1500);
+          }
+        });
+
+        showcaseGrid.appendChild(item);
+      });
+
+      showcaseBox.appendChild(showcaseGrid);
+      sectionList.parentNode.insertBefore(showcaseBox, sectionList);
+    }
 
     // Ẩn/Hiện Tab Trắc nghiệm phụ thuộc vào bài học có trắc nghiệm hay không
     const quizTabBtn = document.querySelector('[data-tab="quiz"]');
@@ -980,6 +1082,48 @@ class AppCoordinator {
       txt.innerHTML = `Lượt chơi: <strong>${pName}</strong> (Quân Đen)`;
       indicator.style.borderColor = "var(--color-primary)";
     }
+  }
+
+  // Lấy mã danh sách các quân cờ tương ứng cho từng phần bài học
+  getSectionPieceCodes(lessonIdx, sectionIdx) {
+    const mappings = {
+      0: [
+        ["wK", "bK"], // Vua
+        ["wQ", "bQ"], // Hậu
+        ["wR", "bR"], // Xe
+        ["wB", "bB"], // Tượng
+        ["wN", "bN"], // Mã
+        ["wP", "bP"]  // Tốt
+      ],
+      1: [
+        ["wK", "wR"], // Nhập thành: Vua & Xe
+        ["wP", "wQ"], // Phong cấp: Tốt & Hậu
+        ["wP", "bP"], // Bắt tốt qua đường: Tốt Trắng & Đen
+        ["wK", "bK"]  // Chạm quân: Vua Trắng & Đen
+      ],
+      2: [
+        ["wN", "bN"], // Đòn chĩa
+        ["wB", "bB"], // Đòn ghim
+        ["wR", "bR"], // Đòn xiên
+        ["wQ", "bQ"]  // Chiếu mở
+      ],
+      3: [
+        ["wB", "wN"], // Khai cuộc Ý: Tượng & Mã
+        ["wQ", "wB"], // Scholar's Mate: Hậu & Tượng
+        ["wP", "wN"]  // Hóa giải: Tốt & Mã
+      ],
+      4: [
+        ["wN", "wQ"], // Cẩm nang
+        ["wR", "wK"],
+        ["wP", "bP"],
+        ["wB", "wB"]
+      ]
+    };
+
+    if (mappings[lessonIdx] && mappings[lessonIdx][sectionIdx]) {
+      return mappings[lessonIdx][sectionIdx];
+    }
+    return null;
   }
 
   // Chuyển đổi mã markdown bold thành thẻ HTML strong
