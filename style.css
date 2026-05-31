@@ -1225,6 +1225,11 @@ body {
 }
 
 /* 11. RESPONSIVE DESIGN (PC -> TABLET -> MOBILE) */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 @media (max-width: 1024px) {
   .main-layout {
     grid-template-columns: 1fr;
@@ -1259,6 +1264,32 @@ body {
     flex-direction: column;
   }
 
+  .main-layout {
+    width: 100%;
+    padding: 0 1rem;
+    margin: 0 auto 2rem auto;
+  }
+
+  /* Kích hoạt thanh Tab trượt ngang mượt mà, chuẩn Mobile App */
+  .tabs-navigation {
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.3rem;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .tabs-navigation::-webkit-scrollbar {
+    display: none; /* Safari & Chrome */
+  }
+
+  .tab-nav-btn {
+    flex: 0 0 auto;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+  }
+
   .interactive-practice-area {
     grid-template-columns: 1fr;
   }
@@ -1270,11 +1301,6 @@ body {
 
   .practice-controls {
     margin-top: 1rem;
-  }
-  
-  .tab-nav-btn {
-    font-size: 0.85rem;
-    padding: 0.6rem;
   }
 }
 
@@ -1291,12 +1317,12 @@ body {
 
   .tab-nav-btn {
     font-size: 0.78rem;
-    padding: 0.5rem 0.2rem;
+    padding: 0.5rem 0.7rem;
     gap: 0.2rem;
   }
 
   .tab-icon {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .lesson-intro-section {
@@ -1321,6 +1347,49 @@ body {
 
   .practice-title {
     font-size: 1.2rem;
+  }
+
+  /* Thu gọn padding của các thẻ cấu hình trên di động */
+  .config-card, .scoreboard-card {
+    padding: 1rem;
+  }
+
+  /* Giảm khoảng cách phần đặt tên và điểm số gia đình */
+  .player-names-input {
+    gap: 4px;
+  }
+
+  .player-names-input input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Giảm kích thước vòng bóng đổ cờ để tránh tràn viền */
+  .active-chessboard-container {
+    padding: 4px;
+  }
+
+  .chess-board-wrapper {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 0 4px rgba(255, 255, 255, 0.05);
+  }
+
+  .versus-turn-bar {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  /* Khay thẻ quyền năng co giãn đẹp mắt */
+  .power-cards-container {
+    padding: 1rem;
+  }
+
+  .cards-flex {
+    gap: 0.5rem;
+  }
+
+  .power-card-btn {
+    padding: 0.5rem;
   }
 
   .practice-controls {
