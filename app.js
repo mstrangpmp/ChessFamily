@@ -254,7 +254,7 @@ class AppCoordinator {
     // Cập nhật tiêu đề chính
     document.getElementById("active-lesson-title").innerText = lesson.title;
     document.getElementById("active-lesson-subtitle").innerText = lesson.subtitle;
-    document.getElementById("active-lesson-intro").innerText = lesson.intro;
+    document.getElementById("active-lesson-intro").innerHTML = this.parseMarkdown(lesson.intro);
 
     // Vẽ danh sách lý thuyết trong Tab 'Lessons'
     const sectionList = document.getElementById("lesson-sections-list");
@@ -265,10 +265,10 @@ class AppCoordinator {
       card.innerHTML = `
         <h3 class="card-title"><span class="bullet-num">${sIdx + 1}</span> ${sec.title}</h3>
         ${sec.value ? `<div class="card-value-badge">${sec.value}</div>` : ""}
-        <p class="card-desc">${sec.desc}</p>
-        ${sec.comparison ? `<div class="card-comparison-box"><strong>Pháp lệnh:</strong> ${sec.comparison}</div>` : ""}
-        ${sec.benefit ? `<div class="card-benefit-box">💡 <strong>Mục tiêu chiến thuật:</strong> ${sec.benefit}</div>` : ""}
-        ${sec.tip ? `<div class="card-tip-box">👨‍👩‍👦 <strong>Mẹo chơi cùng con:</strong> ${sec.tip}</div>` : ""}
+        <p class="card-desc">${this.parseMarkdown(sec.desc)}</p>
+        ${sec.comparison ? `<div class="card-comparison-box"><strong>Pháp lệnh:</strong> ${this.parseMarkdown(sec.comparison)}</div>` : ""}
+        ${sec.benefit ? `<div class="card-benefit-box">💡 <strong>Mục tiêu chiến thuật:</strong> ${this.parseMarkdown(sec.benefit)}</div>` : ""}
+        ${sec.tip ? `<div class="card-tip-box">👨‍👩‍👦 <strong>Mẹo chơi cùng con:</strong> ${this.parseMarkdown(sec.tip)}</div>` : ""}
       `;
       sectionList.appendChild(card);
     });
@@ -641,7 +641,7 @@ class AppCoordinator {
 
       card.innerHTML = `
         <div class="quiz-q-num">Câu hỏi ${qIdx + 1}</div>
-        <h4 class="quiz-q-text">${q.question}</h4>
+        <h4 class="quiz-q-text">${this.parseMarkdown(q.question)}</h4>
         <div class="quiz-options-grid">${optionsHTML}</div>
         <div class="quiz-feedback-box" id="quiz-feedback-${qIdx}"></div>
       `;
@@ -673,11 +673,11 @@ class AppCoordinator {
         if (val === q.answer) {
           score++;
           feedbackBox.className = "quiz-feedback-box success-feedback";
-          feedbackBox.innerHTML = `🌟 <strong>Chính xác!</strong> ${q.explanation}`;
+          feedbackBox.innerHTML = `🌟 <strong>Chính xác!</strong> ${this.parseMarkdown(q.explanation)}`;
           document.querySelector(`.quiz-option-label[data-qidx="${qIdx}"][data-oidx="${val}"]`).classList.add("correct");
         } else {
           feedbackBox.className = "quiz-feedback-box fail-feedback";
-          feedbackBox.innerHTML = `❌ <strong>Chưa chính xác!</strong> Hãy đọc lại hướng dẫn: ${q.explanation}`;
+          feedbackBox.innerHTML = `❌ <strong>Chưa chính xác!</strong> Hãy đọc lại hướng dẫn: ${this.parseMarkdown(q.explanation)}`;
           document.querySelector(`.quiz-option-label[data-qidx="${qIdx}"][data-oidx="${val}"]`).classList.add("incorrect");
           document.querySelector(`.quiz-option-label[data-qidx="${qIdx}"][data-oidx="${q.answer}"]`).classList.add("correct");
         }
@@ -980,6 +980,12 @@ class AppCoordinator {
       txt.innerHTML = `Lượt chơi: <strong>${pName}</strong> (Quân Đen)`;
       indicator.style.borderColor = "var(--color-primary)";
     }
+  }
+
+  // Chuyển đổi mã markdown bold thành thẻ HTML strong
+  parseMarkdown(text) {
+    if (!text) return "";
+    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
   }
 }
 

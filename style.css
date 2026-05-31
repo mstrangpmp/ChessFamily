@@ -385,6 +385,13 @@ html, body {
   margin-bottom: 0.75rem;
 }
 
+/* Làm nổi bật hổ hổ các từ khóa quan trọng */
+.card-desc strong, .lesson-intro-text strong, .quiz-q-text strong, .quiz-feedback-box strong {
+  color: var(--color-secondary);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.15);
+}
+
 .card-comparison-box, .card-benefit-box, .card-tip-box {
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
